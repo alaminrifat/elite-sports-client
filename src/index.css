@@ -1,3 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+.active {
+    @apply font-semibold tracking-wide bg-gray-700 px-4 rounded-2xl py-2 text-white transition-colors duration-200;
+}
