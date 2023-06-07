@@ -9,7 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Navbar = () => {
     const { name, user, logOut, photo } = useContext(AuthContext);
     // console.log(name);
-    const notify = () => toast("Logout Successfull");
     const handleLogout = () => {
         logOut()
             .then(() => {
