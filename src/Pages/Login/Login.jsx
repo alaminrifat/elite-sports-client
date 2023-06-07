@@ -5,6 +5,7 @@ import Lottie from "react-lottie";
 import animationData from "../../assets/lottie/login.json";
 import setTitle from "../../hook/setTitle";
 import { useForm } from "react-hook-form";
+import { ToastContainer, toast } from "react-toastify";
 
 const Login = () => {
     setTitle("Login");
@@ -19,11 +20,12 @@ const Login = () => {
     const from = location?.state?.from?.pathname || "/";
 
     const handleGoogleSignIn = () => {
-        setStatus(null);
-        setError(null);
+        setStatus("");
+        setError("");
         googleSignIn()
             .then((result) => {
-                setError(null);
+                setError("");
+                toast.success("Login Successful",{autoClose: 2000,});
                 setStatus("Sign In Successfull");
                 setUser(result.user);
                 navigate(from, { replace: true });
@@ -49,6 +51,7 @@ const Login = () => {
         console.log(email,password);
         loginWithEmail(email, password)
             .then((result) => {
+                toast.success("Login Successful",{autoClose: 2000,});
                 setError("");
                 setStatus("Sign In Successfull");
                 setUser(result.user);
@@ -70,6 +73,7 @@ const Login = () => {
     };
     return (
         <div>
+            <ToastContainer/>
             <div className="hero min-h-screen bg-base-100">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-1 md:gap-16">
                     <div className="text-center">

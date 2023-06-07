@@ -1,20 +1,27 @@
+import { useContext } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
-
+import { AuthContext } from "../../../Provider/AuthProvider";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 const Navbar = () => {
-    // const { name, user, logOut, photo } = useContext(AuthContext);
-    // // console.log(name);
-    // const handleLogout = () => {
-    //     logOut()
-    //         .then((result) => {
-    //             Swal.fire("Logout", "LogOut Successfull", "success");
-    //         })
-    //         .catch((error) => {
-    //             console.log(error);
-    //         });
-    // };
+    const { name, user, logOut, photo } = useContext(AuthContext);
+    // console.log(name);
+    const notify = () => toast("Logout Successfull");
+    const handleLogout = () => {
+        logOut()
+            .then(() => {
+                toast.error("Logout Successful",{autoClose: 2000,})
+                // Swal.fire("Logout", "LogOut Successfull", "success");
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    };
+    // 
+    
 
     const navOptions = (
         <>
@@ -36,19 +43,29 @@ const Navbar = () => {
             </li>
 
             <li>
-            <NavLink
-                    to="/login"
-                    className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                    Login
-                </NavLink>
-                
+                {user ? (
+                    <li>
+                        <button onClick={handleLogout}>Logout</button>
+                    </li>
+                ) : (
+                    <li>
+                        <NavLink
+                            to="/login"
+                            className={({ isActive }) =>
+                                isActive ? "active" : ""
+                            }
+                        >
+                            Login
+                        </NavLink>
+                    </li>
+                )}
             </li>
         </>
     );
     return (
         <>
-            <div className="navbar fixed z-10 bg-opacity-30 bg-black text-white">
+        <ToastContainer />
+            <div className="navbar fixed z-10 bg-opacity-60 bg-[#00443d] text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -89,25 +106,24 @@ const Navbar = () => {
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">
-                    <ul className="flex gap-10 px-1">
-                        {navOptions}
-                    </ul>
+                    <ul className="flex gap-10 px-1">{navOptions}</ul>
                 </div>
                 <div className="invisible lg:navbar-end  lg:visible me-10 ">
                     <div className="avatar placeholder rounded-full ring ring-primary ring-offset-base-100 ring-offset-2">
                         <div className="bg-neutral-focus text-neutral-content rounded-full w-12">
-                            {/* {user ? (
+                            {user ? (
                                 <img id="yes-element" src={photo} alt={name} />
                             ) : (
                                 <span id="no-element">X</span>
-                            )} */}
-                            <span id="no-element">X</span>
+                            )}
+
+                            {/* <span id="no-element">X</span> */}
                         </div>
                     </div>
                     <Tooltip
                         place="right"
                         anchorSelect="#yes-element"
-                        // content={name}
+                        content={name}
                     />
                     <Tooltip
                         place="right"
