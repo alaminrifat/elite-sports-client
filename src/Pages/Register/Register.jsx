@@ -66,10 +66,32 @@ const Register = () => {
                 // Call the updateInfo function to update user information
                 updateInfo(name, photo)
                     .then(() => {
-                        setStatus("Account Created!! Please Login");
-                        toast.success("Account Created! Now Please Login");
-                        logOut();
-                        navigate("/login");
+                        const saveUser = {
+                            name: name,
+                            email: email,
+                            role: role,
+                        };
+                        console.log(saveUser);
+                        fetch("http://localhost:5000/users", {
+                            method: "POST",
+                            headers: {
+                                "content-type": "application/json",
+                            },
+                            body: JSON.stringify(saveUser),
+                        })
+                            .then((res) => res.json())
+                            .then((data) => {
+                                console.log(data);
+                                if (data.insertedId) {
+                                    setStatus("Account Created!! Please Login");
+                                    toast.success(
+                                        "Account Created! Now Please Login"
+                                    );
+                                    reset();
+                                    logOut();
+                                    navigate("/login");
+                                }
+                            });
                     })
                     .catch((error) => {
                         toast.error(error.message);
@@ -111,106 +133,123 @@ const Register = () => {
                 </div>
             )}
 
-            <div className="hero min-h-screen bg-base-100">
-                <div className="hero-content flex-col lg:flex-row-reverse gap-0 md:gap-16">
-                    <div className="text-center">
-                        <div>
-                            <h1 className="text-5xl font-bold text-[#00897b]">
-                                Register now!
-                            </h1>
-                            <Lottie
-                                options={defaultOptions}
-                                className="w-[600px]"
-                            />
+            {isLoading || (
+                <div className="hero min-h-screen bg-base-100">
+                    <div className="hero-content flex-col lg:flex-row-reverse gap-0 md:gap-16">
+                        <div className="text-center">
+                            <div>
+                                <h1 className="text-5xl font-bold text-[#00897b]">
+                                    Register now!
+                                </h1>
+                                <Lottie
+                                    options={defaultOptions}
+                                    className="w-[600px]"
+                                />
+                            </div>
                         </div>
+                        <Form
+                            onSubmit={handleSubmit(onSubmit)}
+                            className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
+                        >
+                            <div className="card-body">
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">Name</span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="name"
+                                        placeholder="Your name"
+                                        className="input input-bordered"
+                                        {...register("name", {
+                                            required: true,
+                                        })}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">
+                                            Email
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="email"
+                                        placeholder="Your email"
+                                        className="input input-bordered"
+                                        {...register("email", {
+                                            required: true,
+                                        })}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">
+                                            Password
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="password"
+                                        name="password"
+                                        placeholder="Your Password"
+                                        className="input input-bordered"
+                                        {...register("password", {
+                                            required: true,
+                                        })}
+                                    />
+                                </div>
+                                <div className="form-control">
+                                    <label className="label">
+                                        <span className="label-text">
+                                            Photo URL
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        name="photo"
+                                        placeholder="Your Photo URL"
+                                        className="input input-bordered"
+                                        {...register("photoURL", {
+                                            required: true,
+                                        })}
+                                    />
+                                </div>
+                                <p className="text-sm">
+                                    Already have an account? Please{" "}
+                                    <Link
+                                        to={"/login"}
+                                        className="text-indigo-500"
+                                    >
+                                        Login here
+                                    </Link>
+                                </p>
+                                <div className="text-center">
+                                    {isLoading ? ( // Display loading text when isLoading is true
+                                        <p className="text-teal-600">
+                                            Loading...
+                                        </p>
+                                    ) : null}
+                                    {status ? (
+                                        <p className="text-teal-600">
+                                            {status}
+                                        </p>
+                                    ) : null}
+                                    {error ? (
+                                        <p className="text-red-500 ">{error}</p>
+                                    ) : null}
+                                </div>
+                                <div className="form-control mt-2">
+                                    <input
+                                        className="btn bg-[#00897b] text-white hover:bg-[#0f4741]"
+                                        type="submit"
+                                        value="Sign Up"
+                                    />
+                                </div>
+                            </div>
+                        </Form>
                     </div>
-                    <Form
-                        onSubmit={handleSubmit(onSubmit)}
-                        className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
-                    >
-                        <div className="card-body">
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Name</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="name"
-                                    placeholder="Your name"
-                                    className="input input-bordered"
-                                    {...register("name", { required: true })}
-                                />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Email</span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="email"
-                                    placeholder="Your email"
-                                    className="input input-bordered"
-                                    {...register("email", { required: true })}
-                                />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">Password</span>
-                                </label>
-                                <input
-                                    type="password"
-                                    name="password"
-                                    placeholder="Your Password"
-                                    className="input input-bordered"
-                                    {...register("password", {
-                                        required: true,
-                                    })}
-                                />
-                            </div>
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="label-text">
-                                        Photo URL
-                                    </span>
-                                </label>
-                                <input
-                                    type="text"
-                                    name="photo"
-                                    placeholder="Your Photo URL"
-                                    className="input input-bordered"
-                                    {...register("photoURL", {
-                                        required: true,
-                                    })}
-                                />
-                            </div>
-                            <p className="text-sm">
-                                Already have an account? Please{" "}
-                                <Link to={"/login"} className="text-indigo-500">
-                                    Login here
-                                </Link>
-                            </p>
-                            <div className="text-center">
-                                {isLoading ? ( // Display loading text when isLoading is true
-                                    <p className="text-teal-600">Loading...</p>
-                                ) : null}
-                                {status ? (
-                                    <p className="text-teal-600">{status}</p>
-                                ) : null}
-                                {error ? (
-                                    <p className="text-red-500 ">{error}</p>
-                                ) : null}
-                            </div>
-                            <div className="form-control mt-2">
-                                <input
-                                    className="btn bg-[#00897b] text-white hover:bg-[#0f4741]"
-                                    type="submit"
-                                    value="Sign Up"
-                                />
-                            </div>
-                        </div>
-                    </Form>
                 </div>
-            </div>
+            )}
         </div>
     );
 };

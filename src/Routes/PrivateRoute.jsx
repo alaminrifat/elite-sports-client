@@ -9,7 +9,11 @@ const PrivateRoute = ({ children }) => {
 
     console.log("user in private route", user);
     if (loading) {
-        return <div className="h-[600px] flex items-center justify-center"><FadeLoader color="#36d7b7" /></div> ;
+        return (
+            <div className="h-[600px] flex items-center justify-center">
+                <FadeLoader color="#36d7b7" />
+            </div>
+        );
     }
     if (user) {
         return children;

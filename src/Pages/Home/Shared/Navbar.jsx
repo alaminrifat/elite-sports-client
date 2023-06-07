@@ -3,8 +3,8 @@ import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
 import { AuthContext } from "../../../Provider/AuthProvider";
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const Navbar = () => {
     const { name, user, logOut, photo } = useContext(AuthContext);
@@ -12,15 +12,14 @@ const Navbar = () => {
     const handleLogout = () => {
         logOut()
             .then(() => {
-                toast.error("Logout Successful",{autoClose: 2000,})
+                toast.error("Logout Successful", { autoClose: 2000 });
                 // Swal.fire("Logout", "LogOut Successfull", "success");
             })
             .catch((error) => {
                 console.log(error);
             });
     };
-    // 
-    
+    //
 
     const navOptions = (
         <>
@@ -40,30 +39,35 @@ const Navbar = () => {
                     Blog
                 </NavLink>
             </li>
-
             <li>
-                {user ? (
-                    <li>
-                        <button onClick={handleLogout}>Logout</button>
-                    </li>
-                ) : (
-                    <li>
-                        <NavLink
-                            to="/login"
-                            className={({ isActive }) =>
-                                isActive ? "active" : ""
-                            }
-                        >
-                            Login
-                        </NavLink>
-                    </li>
-                )}
+                {" "}
+                <NavLink
+                    to="/classes"
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                    Classes
+                </NavLink>{" "}
             </li>
+
+            {user ? (
+                <li>
+                    <button onClick={handleLogout}>Logout</button>
+                </li>
+            ) : (
+                <li>
+                    <NavLink
+                        to="/login"
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                        Login
+                    </NavLink>
+                </li>
+            )}
         </>
     );
     return (
         <>
-        <ToastContainer />
+            <ToastContainer />
             <div className="navbar fixed z-10 bg-opacity-60 bg-[#00443d] text-white">
                 <div className="navbar-start">
                     <div className="dropdown">
