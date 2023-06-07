@@ -5,25 +5,38 @@ import Lottie from "react-lottie";
 import animationData from "../../assets/lottie/login.json";
 import setTitle from "../../hook/setTitle";
 import { isValidEmail, isValidPassword } from "../../Utils/vaildation";
+import { useForm } from "react-hook-form";
+
 const Register = () => {
     setTitle("Register");
 
     // const { createUser } = useContext(AuthContext);
     const { createUser, updateInfo, setUser, logOut } = useContext(AuthContext);
-    const [status, setStatus] = useState(null);
-    const [error, setError] = useState(null);
+    const [status, setStatus] = useState("");
+    const [error, setError] = useState("");
 
     const navigate = useNavigate();
-    const handleRegister = (event) => {
-        setStatus(null);
-        setError(null);
-        // console.log('clicnke');
-        event.preventDefault();
-        const form = event.target;
-        const name = form.name.value;
-        const photo = form.photo.value;
-        const email = form.email.value;
-        const password = form.password.value;
+
+
+    const {
+        register,
+        handleSubmit,
+        reset,
+    } = useForm();
+
+
+    const onSubmit = (data) => handleRegister(data);
+
+    const handleRegister = (data) => {
+        setStatus("");
+        setError("");
+
+        const name = data.name;
+        const photo = data.photoURL;
+        const email = data.email;
+        const password = data.password;
+
+        // console.log(data);
 
         if (!email || !password) {
             setError("Email or password Cann't be empty");
@@ -42,36 +55,36 @@ const Register = () => {
         }
 
         // console.log(name, photo, email, password);
-        createUser(email, password)
-            .then((result) => {
-                setUser(result.user);
-                setStatus("Account Created!! Please Login");
-                updateInfo(name, photo)
-                    .then(() => {
-                        setStatus("Account Created!! Please Login");
-                        // Swal.fire(
-                        //     "Registered Success",
-                        //     "Now Please Login To get Access",
-                        //     "success"
-                        // );
-                        logOut();
-                        navigate("/login");
-                    })
-                    .catch((error) => {
-                        setError(error.message);
-                    });
-            })
-            .catch((error) => {
-                if (
-                    error.message ==
-                    "Firebase: Error (auth/email-already-in-use)."
-                ) {
-                    setError("Email Already In Use!!");
-                } else {
-                    setError(error.message);
-                }
-            });
-        form.reset();
+        // createUser(email, password)
+        //     .then((result) => {
+        //         setUser(result.user);
+        //         setStatus("Account Created!! Please Login");
+        //         updateInfo(name, photo)
+        //             .then(() => {
+        //                 setStatus("Account Created!! Please Login");
+        //                 // Swal.fire(
+        //                 //     "Registered Success",
+        //                 //     "Now Please Login To get Access",
+        //                 //     "success"
+        //                 // );
+        //                 logOut();
+        //                 navigate("/login");
+        //             })
+        //             .catch((error) => {
+        //                 setError(error.message);
+        //             });
+        //     })
+        //     .catch((error) => {
+        //         if (
+        //             error.message ==
+        //             "Firebase: Error (auth/email-already-in-use)."
+        //         ) {
+        //             setError("Email Already In Use!!");
+        //         } else {
+        //             setError(error.message);
+        //         }
+        //     });
+        reset();
     };
     const defaultOptions = {
         loop: true,
@@ -99,7 +112,7 @@ const Register = () => {
                         </div>
                     </div>
                     <Form
-                        onSubmit={handleRegister}
+                        onSubmit={handleSubmit(onSubmit)}
                         className="card flex-shrink-0 w-full max-w-sm shadow-2xl bg-base-100"
                     >
                         <div className="card-body">
@@ -112,6 +125,7 @@ const Register = () => {
                                     name="name"
                                     placeholder="Your name"
                                     className="input input-bordered"
+                                    {...register("name", {required: true})}
                                 />
                             </div>
                             <div className="form-control">
@@ -123,6 +137,7 @@ const Register = () => {
                                     name="email"
                                     placeholder="Your email"
                                     className="input input-bordered"
+                                    {...register("email", {required: true})}
                                 />
                             </div>
                             <div className="form-control">
@@ -134,6 +149,7 @@ const Register = () => {
                                     name="password"
                                     placeholder="Your Password"
                                     className="input input-bordered"
+                                    {...register("password", {required: true})}
                                 />
                             </div>
                             <div className="form-control">
@@ -147,11 +163,12 @@ const Register = () => {
                                     name="photo"
                                     placeholder="Your Photo URL"
                                     className="input input-bordered"
+                                    {...register("photoURL", {required: true})}
                                 />
                             </div>
-                            <p className="text-md">
-                                {" "}
-                                Already have an account? Please
+                            <p className="text-sm">
+                               
+                                Already have an account? Please 
                                 <Link to={"/login"} className="text-indigo-500">
                                     Login here
                                 </Link>
