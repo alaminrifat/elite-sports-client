@@ -20,11 +20,11 @@ const Dashboard = () => {
                 <label htmlFor="my-drawer-2" className="drawer-overlay"></label>
                 <ul className="menu p-4 w-80 h-full bg-[#00897b]  text-white text-lg">
                     {/* Sidebar content here */}
-                    <li className="">
-                        <a>Sidebar Item 1</a>
+                    <li>
+                        <NavLink to="selectedClasses">Selected Class</NavLink>
                     </li>
                     <li>
-                        <a>Sidebar Item 2</a>
+                        <NavLink to="enrolledClasses">Enrolled Class</NavLink>
                     </li>
                 </ul>
             </div>

@@ -5,3 +5,10 @@
 .active {
     @apply font-semibold tracking-wide bg-[#005249] px-4 rounded-2xl py-2 text-white transition-colors duration-200;
 }
+
+.drawer-side a:active{
+    background-color: white;
+}
+.drawer-side a{
+    background-color: transparent;
+}

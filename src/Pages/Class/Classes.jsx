@@ -1,31 +1,68 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import useAxiosSecure from "../../hook/useAxiosSecure";
+import axios from "axios";
 
 const Classes = () => {
     const [classes, setClasses] = useState([]);
     const { user } = useContext(AuthContext);
-    const location = useLocation();
     const navigate = useNavigate();
+    const token = localStorage.getItem("access-token");
+    const axiosSecure = useAxiosSecure();
 
-    const handleSelect = (id) => {
+    const handleSelect = (classItem) => {
         if (!user) {
-            toast.error("You need to login to select a class",{autoClose:3000});
+            toast.error("You need to login to select a class", {
+                autoClose: 3000,
+            });
             navigate("/login");
         } else {
-            console.log(id);
+            const selectedClass = {
+                email: user.email,
+                course: classItem,
+                status: "unpaid",
+            };
+            console.log(selectedClass);
+            fetch("http://localhost:5000/classes", {
+                method: "POST",
+                headers: {
+                    authorization: `bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(selectedClass),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    // console.log(data);
+                    if (data.insertedId) {
+                        toast.success(
+                            "Class is selected, pay to enroll the class"
+                        );
+                    }
+                });
         }
     };
     useEffect(() => {
-        fetch("http://localhost:5000/classes", {
-            method: "GET",
-        })
-            .then((res) => res.json())
+        axiosSecure
+            .get("/classes")
             .then((data) => {
-                setClasses(data);
+                setClasses(data.data);
+            })
+            .catch((error) => {
+                console.error("Error fetching classes:", error);
             });
-    }, []);
+
+        // fetch("http://localhost:5000/classes", {
+        //     headers:{authorization:`bearer ${token}`},
+        //     method: "GET",
+        // })
+        //     .then((res) => res.json())
+        //     .then((data) => {
+        //         setClasses(data);
+        //     });
+    }, [axiosSecure]);
     return (
         <div>
             {/* Banner */}
@@ -71,7 +108,7 @@ const Classes = () => {
 
                             <div className="mt-4">
                                 <button
-                                    onClick={() => handleSelect(classItem._id)}
+                                    onClick={() => handleSelect(classItem)}
                                     disabled={classItem.availableSeats == 0}
                                     // className="disable block w-full rounded bg-[#00897b] text-white  p-4 text-sm font-medium transition hover:scale-105"
                                     className={`block w-full rounded text-white p-4 text-sm font-medium transition hover:scale-105 ${
