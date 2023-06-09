@@ -10,6 +10,7 @@ import Classes from "../Pages/Class/Classes";
 import SelectedClass from "../Pages/Dashboard/SelectedClass";
 import EnrolledClass from "../Pages/Dashboard/EnrolledClass";
 import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
+import Instructors from "../Pages/Instructors/Instructors";
 
 export const router = createBrowserRouter([
     {
@@ -30,6 +31,10 @@ export const router = createBrowserRouter([
         {
             path:'classes',
             element:<Classes/>
+        },
+        {
+            path:'instructors',
+            element:<Instructors/>
         },
         
         {

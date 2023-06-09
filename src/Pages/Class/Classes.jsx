@@ -3,7 +3,6 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hook/useAxiosSecure";
-import axios from "axios";
 
 const Classes = () => {
     const [classes, setClasses] = useState([]);
