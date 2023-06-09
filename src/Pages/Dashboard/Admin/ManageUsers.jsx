@@ -3,7 +3,7 @@ import { useQuery } from "react-query";
 import { FadeLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
 
-const AdminHome = () => {
+const ManageUsers = () => {
     const {
         data: tqData = [],
         isLoading,
@@ -107,4 +107,4 @@ const AdminHome = () => {
     );
 };
 
-export default AdminHome;
+export default ManageUsers;

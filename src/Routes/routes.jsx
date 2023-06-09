@@ -9,10 +9,10 @@ import StudentDashboard from "../Pages/Dashboard/StudentDashboard";
 import Classes from "../Pages/Class/Classes";
 import SelectedClass from "../Pages/Dashboard/SelectedClass";
 import EnrolledClass from "../Pages/Dashboard/EnrolledClass";
-import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 import Instructors from "../Pages/Instructors/Instructors";
 import AddCourse from "../Pages/Dashboard/Instructor/AddCourse";
 import ClassesPage from "../Pages/Dashboard/Admin/ClassesPage";
+import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 
 export const router = createBrowserRouter([
     {
@@ -48,6 +48,7 @@ export const router = createBrowserRouter([
         path:'dashboard',
         element:<Dashboard/>,
         children:[
+            // for students
             {
                 path:'student',
                 element:<StudentDashboard/>
@@ -60,13 +61,15 @@ export const router = createBrowserRouter([
                 path:'enrolledClasses',
                 element:<EnrolledClass></EnrolledClass>
             },
-            {
-                path:'adminhome',
-                element:<AdminHome></AdminHome>
-            },
+            // for instructors
             {
                 path:'addCourse',
                 element:<AddCourse></AddCourse>
+            },
+            // for addmin
+            {
+                path:'manageUsers',
+                element:<ManageUsers></ManageUsers>
             },
             {
                 path:'manageClasses',
