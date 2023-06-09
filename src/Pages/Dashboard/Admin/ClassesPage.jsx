@@ -71,31 +71,35 @@ const ClassesPage = () => {
 
     const handleFeedbackSubmit = async (e) => {
         e.preventDefault();
-        console.log(feedbackMessage);
+        console.log(selectedClass, feedbackMessage);
         try {
-            await fetch(`/api/classes/${selectedClass}/feedback`, {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({ feedback: feedbackMessage }),
-            });
+            await fetch(
+                `http://localhost:5000/api/classes/${selectedClass}/feedback`,
+                {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ feedback: feedbackMessage }),
+                }
+            );
+            toast.success("Feedback message has been sent");
             setFeedbackMessage("");
             setFeedbackModalOpen(false);
             fetchClasses();
         } catch (error) {
-            console.error("Error sending feedback:", error);
+            toast.error("Error sending feedback:", error);
         }
     };
 
     return (
         <div>
             <ToastContainer></ToastContainer>
-            <h1>Classes</h1>
-            <div className="overflow-x-auto">
+            <h1 className="text-4xl font-bold my-10 text-center">Classes</h1>
+            <div className="container mx-auto overflow-x-auto">
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className="text-lg font-semibold">
                         <tr>
                             <th>#</th>
 
@@ -127,9 +131,6 @@ const ClassesPage = () => {
                                             <div className="font-bold">
                                                 {item.name}
                                             </div>
-                                            <div className="text-sm opacity-50">
-                                                United States
-                                            </div>
                                         </div>
                                     </div>
                                 </td>
@@ -143,22 +144,37 @@ const ClassesPage = () => {
                                 </td>
                                 <td>{item.availableSeats}</td>
                                 <td>${item.price}</td>
-                                <td>{item.status}</td>
+                                <td
+                                    className={
+                                        item.status === "denied"
+                                            ? "text-red-600"
+                                            : item.status === "approved"
+                                            ? "text-teal-600"
+                                            : item.status === "pending"
+                                            ? "text-blue-600"
+                                            : ""
+                                    }
+                                >
+                                    {item.status}
+                                </td>
+
                                 <th>
                                     <button
-                                        className="btn btn-success btn-xs me-2"
+                                        className="btn btn-success btn-xs text-white me-2"
                                         onClick={() => handleApprove(item._id)}
+                                        disabled={item.status === "approved"}
                                     >
                                         approve
                                     </button>
                                     <button
-                                        className="btn btn-error btn-xs me-2"
+                                        className="btn btn-error btn-xs text-white me-2"
                                         onClick={() => handleDeny(item._id)}
+                                        disabled={item.status === "denied"}
                                     >
                                         deny
                                     </button>
                                     <button
-                                        className="btn btn-info btn-xs"
+                                        className="btn btn-info btn-xs text-white"
                                         onClick={() =>
                                             handleSendFeedback(item._id)
                                         }
