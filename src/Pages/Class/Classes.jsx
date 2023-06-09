@@ -24,7 +24,7 @@ const Classes = () => {
                 course: classItem,
                 status: "unpaid",
             };
-            console.log(selectedClass);
+            // console.log(selectedClass);
             fetch("http://localhost:5000/classes", {
                 method: "POST",
                 headers: {
@@ -40,6 +40,8 @@ const Classes = () => {
                         toast.success(
                             "Class is selected, pay to enroll the class"
                         );
+                    } else {
+                        toast.error("This class has already been selected");
                     }
                 });
         }

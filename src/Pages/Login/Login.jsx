@@ -19,14 +19,35 @@ const Login = () => {
     const location = useLocation();
     const from = location?.state?.from?.pathname || "/";
 
+    const storeNewUser = (newUser) => {
+        const user = {
+            name: newUser.displayName,
+            email: newUser.email,
+            role: "student",
+        };
+        fetch("http://localhost:5000/users", {
+            method: "POST",
+            headers: {
+                "content-type": "application/json",
+            },
+            body: JSON.stringify(user),
+        }).then(res => res.json())
+        .then(data => {
+            if(data.insertedId){
+                toast.success('New user Sign in Success!');
+            }
+        })
+    };
+
     const handleGoogleSignIn = () => {
         setStatus("");
         setError("");
         googleSignIn()
             .then((result) => {
                 setError("");
-                toast.success("Login Successful",{autoClose: 2000,});
+                toast.success("Login Successful", { autoClose: 2000 });
                 setStatus("Sign In Successfull");
+                storeNewUser(result.user);
                 setUser(result.user);
                 navigate(from, { replace: true });
             })
@@ -34,12 +55,7 @@ const Login = () => {
                 setError(error.message);
             });
     };
-    const {
-        register,
-        handleSubmit,
-        reset,
-    } = useForm();
-
+    const { register, handleSubmit, reset } = useForm();
 
     const onSubmit = (data) => hangleEmailLogin(data);
 
@@ -48,10 +64,10 @@ const Login = () => {
         setError("");
         const email = data.email;
         const password = data.password;
-        console.log(email,password);
+        console.log(email, password);
         loginWithEmail(email, password)
             .then((result) => {
-                toast.success("Login Successful",{autoClose: 2000,});
+                toast.success("Login Successful", { autoClose: 2000 });
                 setError("");
                 setStatus("Sign In Successfull");
                 setUser(result.user);
@@ -73,7 +89,7 @@ const Login = () => {
     };
     return (
         <div>
-            <ToastContainer/>
+            <ToastContainer />
             <div className="hero min-h-screen bg-base-100">
                 <div className="hero-content flex-col lg:flex-row-reverse gap-1 md:gap-16">
                     <div className="text-center">
@@ -103,7 +119,7 @@ const Login = () => {
                                     name="email"
                                     placeholder="email"
                                     className="input input-bordered"
-                                    {...register("email", {required: true})}
+                                    {...register("email", { required: true })}
                                 />
                             </div>
                             <div className="form-control">
@@ -115,7 +131,9 @@ const Login = () => {
                                     name="password"
                                     placeholder="password"
                                     className="input input-bordered"
-                                    {...register("password", {required: true})}
+                                    {...register("password", {
+                                        required: true,
+                                    })}
                                 />
                             </div>
                             <p className="text-md">

@@ -9,6 +9,7 @@ import StudentDashboard from "../Pages/Dashboard/StudentDashboard";
 import Classes from "../Pages/Class/Classes";
 import SelectedClass from "../Pages/Dashboard/SelectedClass";
 import EnrolledClass from "../Pages/Dashboard/EnrolledClass";
+import AdminHome from "../Pages/Dashboard/Admin/AdminHome";
 
 export const router = createBrowserRouter([
     {
@@ -51,6 +52,10 @@ export const router = createBrowserRouter([
             {
                 path:'enrolledClasses',
                 element:<EnrolledClass></EnrolledClass>
+            },
+            {
+                path:'adminhome',
+                element:<AdminHome></AdminHome>
             },
         ]
     }

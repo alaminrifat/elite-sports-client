@@ -1,8 +1,12 @@
+import useStudent from "../../hook/useStudent";
+
 
 const EnrolledClass = () => {
-    return (
+    const [isStudent,] = useStudent();
+        return (
         <div>
             Show Enrolled Class
+            
         </div>
     );
 };
