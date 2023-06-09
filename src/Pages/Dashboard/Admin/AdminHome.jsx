@@ -45,7 +45,7 @@ const AdminHome = () => {
     const updateUserRole = (userId, role) => {
         axios
             .patch(`http://localhost:5000/users/${userId}`, { role })
-            .then((response) => {
+            .then(() => {
                 toast.success(`User is now ${role}`);
                 refetch();
             })
