@@ -10,7 +10,7 @@ const ClassesPage = () => {
     useEffect(() => {
         fetchClasses();
     }, [classes]);
-    
+
     const fetchClasses = () => {
         fetch("http://localhost:5000/all-classes", {
             method: "GET",
@@ -32,12 +32,29 @@ const ClassesPage = () => {
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.modifiedCount > 0) {
-                        toast.success("Course Updated");
+                        toast.success("Course Approved Successfull");
                         fetchClasses();
                     }
                 });
         } catch (error) {
             toast.error("Error approving class:", error);
+        }
+    };
+    const handleDeny = async (classId) => {
+        console.log(classId);
+        try {
+            await fetch(`http://localhost:5000/api/classes/${classId}/deny`, {
+                method: "PATCH",
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    if (data.modifiedCount > 0) {
+                        toast.success("Course Denied Successfull");
+                        fetchClasses();
+                    }
+                });
+        } catch (error) {
+            toast.error("Error deny class:", error);
         }
     };
 
@@ -134,7 +151,10 @@ const ClassesPage = () => {
                                     >
                                         approve
                                     </button>
-                                    <button className="btn btn-error btn-xs me-2">
+                                    <button
+                                        className="btn btn-error btn-xs me-2"
+                                        onClick={() => handleDeny(item._id)}
+                                    >
                                         deny
                                     </button>
                                     <button
