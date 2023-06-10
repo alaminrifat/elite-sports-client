@@ -20,7 +20,9 @@ const SelectedClass = () => {
             .then((response) => {
                 const data = response.data;
                 // console.log(data);
-                setSelectedClass(data);
+                
+                const unPaid = data.filter((item) => item.status === 'unpaid');
+                setSelectedClass(unPaid);
                 setIsLoading(false);
             })
             .catch((error) => {
@@ -29,11 +31,6 @@ const SelectedClass = () => {
     }, [axiosSecure, user]);
 
 
-    const handlePayNowClick = (item) => {
-        // Redirect to the checkout page with the selected item prop
-        console.log(item);
-        
-    };
     return (
         <>
             <h1 className="text-4xl container mx-auto mt-4">

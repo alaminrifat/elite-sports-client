@@ -102,9 +102,8 @@ const Navbar = () => {
                         </Link>
                         <Link
                             to={"/"}
-                            className="normal-case font-bold text-3xl font-cursive text-white"
-                        >
-                            Elite Sports Academy
+                            className="normal-case font-bold md:text-3xl font-cursive text-white whitespace-nowrap"
+                        >Elite Sports Academy
                         </Link>
                     </div>
                 </div>
