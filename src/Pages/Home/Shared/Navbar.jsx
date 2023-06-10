@@ -31,14 +31,7 @@ const Navbar = () => {
                     Home
                 </NavLink>
             </li>
-            <li>
-                <NavLink
-                    to="/blog"
-                    className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                    Blog
-                </NavLink>
-            </li>
+
             <li>
                 {" "}
                 <NavLink
@@ -48,7 +41,14 @@ const Navbar = () => {
                     Classes
                 </NavLink>{" "}
             </li>
-
+            <li>
+                <NavLink
+                    to="/dashboard"
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                    Dashboard
+                </NavLink>
+            </li>
             {user ? (
                 <li>
                     <button onClick={handleLogout}>Logout</button>
@@ -103,7 +103,8 @@ const Navbar = () => {
                         <Link
                             to={"/"}
                             className="normal-case font-bold md:text-3xl font-cursive text-white whitespace-nowrap"
-                        >Elite Sports Academy
+                        >
+                            Elite Sports Academy
                         </Link>
                     </div>
                 </div>

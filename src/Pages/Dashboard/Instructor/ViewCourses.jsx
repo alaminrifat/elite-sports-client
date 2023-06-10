@@ -3,7 +3,7 @@ import { useContext } from "react";
 import { useEffect, useState } from "react";
 import { useQuery } from "react-query";
 import { FadeLoader } from "react-spinners";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../Provider/AuthProvider";
 
 const ViewCourses = () => {
@@ -36,7 +36,7 @@ const ViewCourses = () => {
     });
     useEffect(() => {
         refetch(); // Refetch the data whenever user.email changes
-    }, [user?.email]);
+    }, [user?.email,refetch]);
 
     const viewFeedback = async (feedback) => {
         console.log(feedback);
