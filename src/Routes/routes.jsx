@@ -13,6 +13,7 @@ import Instructors from "../Pages/Instructors/Instructors";
 import AddCourse from "../Pages/Dashboard/Instructor/AddCourse";
 import ClassesPage from "../Pages/Dashboard/Admin/ClassesPage";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
+import ViewCourses from "../Pages/Dashboard/Instructor/ViewCourses";
 
 export const router = createBrowserRouter([
     {
@@ -65,6 +66,10 @@ export const router = createBrowserRouter([
             {
                 path:'addCourse',
                 element:<AddCourse></AddCourse>
+            },
+            {
+                path:'viewCourse',
+                element:<ViewCourses></ViewCourses>
             },
             // for addmin
             {

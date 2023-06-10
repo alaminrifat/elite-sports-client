@@ -139,8 +139,7 @@ const ClassesPage = () => {
                                     <br />
                                 </td>
                                 <td>
-                                    email
-                                    {item.instructorEmail}
+                                    {item?.email}
                                 </td>
                                 <td>{item.availableSeats}</td>
                                 <td>${item.price}</td>

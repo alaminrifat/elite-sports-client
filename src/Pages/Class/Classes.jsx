@@ -54,15 +54,6 @@ const Classes = () => {
             .catch((error) => {
                 console.error("Error fetching classes:", error);
             });
-
-        // fetch("http://localhost:5000/classes", {
-        //     headers:{authorization:`bearer ${token}`},
-        //     method: "GET",
-        // })
-        //     .then((res) => res.json())
-        //     .then((data) => {
-        //         setClasses(data);
-        //     });
     }, [axiosSecure]);
     return (
         <div>
