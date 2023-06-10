@@ -1,7 +1,7 @@
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
-import { Slide } from "react-awesome-reveal";
+import { Fade, Slide } from "react-awesome-reveal";
 import { Typewriter } from "react-simple-typewriter";
 
 const PopularClasses = () => {
@@ -21,7 +21,8 @@ const PopularClasses = () => {
     return (
         <div className="container mx-auto my-32">
             <h1 className="text-center text-4xl font-bold my-20">
-                Popular Classes <span style={{ color: "teal", fontWeight: "bold" }}>
+                Popular Classes{" "}
+                <span style={{ color: "teal", fontWeight: "bold" }}>
                     <Typewriter
                         className="text-teal-700"
                         words={["Don't Miss", "Enroll Now"]}
@@ -36,7 +37,7 @@ const PopularClasses = () => {
             </h1>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8 ms-3 me-3 md:me-0 md:ms-0">
                 {popularClasses.map((item) => (
-                    <Slide key={item._id}>
+                    <Fade key={item._id} delay={100}>
                         <div className="block rounded-lg p-4 shadow-sm shadow-indigo-100">
                             <img
                                 alt="Home"
@@ -45,33 +46,30 @@ const PopularClasses = () => {
                             />
 
                             <div className="mt-2">
-                                <dl>
-                                    <p className="text-sm text-gray-500">
-                                        ${item.price}
-                                    </p>
+                                <div className="text-sm text-gray-500">
+                                    ${item.price}
+                                </div>
 
-                                    <div>
-                                        <p className="font-medium">
-                                            {item.name}
-                                        </p>
-                                    </div>
-                                </dl>
+                                <div>
+                                    <p className="font-medium">{item.name}</p>
+                                </div>
 
-                                <p className="mt-2 flex items-center gap-1 text-xs">
+                                <div className="mt-2 flex items-center gap-1 text-xs">
                                     Instructor:<p> {item.instructor}</p>
-                                </p>
+                                </div>
                                 <div className="mt-1 flex justify-start gap-10 text-gray-500 ">
-                                <p className="flex items-center gap-1 text-xs">
-                                    Enrolled Students:
-                                    <p> {item.enrolledStudents}</p>
-                                </p>
-                                <p className="flex items-center gap-1 text-xs">
-                                    Available Seat:<p> {item.availableSeats}</p>
-                                </p>
+                                    <p className="flex items-center gap-1 text-xs">
+                                        Enrolled Students:
+                                        <p> {item.enrolledStudents}</p>
+                                    </p>
+                                    <p className="flex items-center gap-1 text-xs">
+                                        Available Seat:
+                                        <p> {item.availableSeats}</p>
+                                    </p>
                                 </div>
                             </div>
                         </div>
-                    </Slide>
+                    </Fade>
                 ))}
             </div>
         </div>

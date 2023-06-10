@@ -3,8 +3,10 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hook/useAxiosSecure";
+import setTitle from "../../hook/setTitle";
 
 const Classes = () => {
+    setTitle("Classes");
     const [classes, setClasses] = useState([]);
     const { user } = useContext(AuthContext);
     const navigate = useNavigate();
