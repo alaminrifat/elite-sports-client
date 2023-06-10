@@ -19,7 +19,7 @@ const ViewCourses = () => {
         data: tqData = [],
         isLoading,
         refetch,
-        error,
+        
     } = useQuery("classes", async () => {
         const response = await axios.get(
             `http://localhost:5000/all-classes/${user?.email}`,
@@ -55,7 +55,7 @@ const ViewCourses = () => {
     return (
         <div>
             <ToastContainer />
-            <h1 className="text-4xl font-bold my-10 text-center">Classes</h1>
+            <h1 className="text-4xl font-bold my-10 text-center">Your Classes</h1>
             <div className="container mx-auto overflow-x-auto">
                 <table className="table">
                     <thead className="text-lg font-semibold">

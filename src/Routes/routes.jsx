@@ -14,6 +14,7 @@ import AddCourse from "../Pages/Dashboard/Instructor/AddCourse";
 import ClassesPage from "../Pages/Dashboard/Admin/ClassesPage";
 import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import ViewCourses from "../Pages/Dashboard/Instructor/ViewCourses";
+import MakePayment from "../Pages/Dashboard/Payment/MakePayment";
 
 export const router = createBrowserRouter([
     {
@@ -61,6 +62,10 @@ export const router = createBrowserRouter([
             {
                 path:'enrolledClasses',
                 element:<EnrolledClass></EnrolledClass>
+            },
+            {
+                path:'payment/:id',
+                element:<MakePayment></MakePayment>
             },
             // for instructors
             {

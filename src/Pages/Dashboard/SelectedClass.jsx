@@ -3,12 +3,14 @@ import { AuthContext } from "../../Provider/AuthProvider";
 import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
 import useAxiosSecure from "../../hook/useAxiosSecure";
+import { Link } from 'react-router-dom';
 
 const SelectedClass = () => {
     const { user } = useContext(AuthContext);
     const [selectedClass, setSelectedClass] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
     const axiosSecure = useAxiosSecure();
+
 
 
     useEffect(() => {
@@ -24,8 +26,14 @@ const SelectedClass = () => {
             .catch((error) => {
                 console.error("Error fetching selected classes:", error);
             });
-    }, [axiosSecure,user]);
+    }, [axiosSecure, user]);
 
+
+    const handlePayNowClick = (item) => {
+        // Redirect to the checkout page with the selected item prop
+        console.log(item);
+        
+    };
     return (
         <>
             <h1 className="text-4xl container mx-auto mt-4">
@@ -59,10 +67,15 @@ const SelectedClass = () => {
                                     {item.course.availableSeats}
                                 </p>
                                 <div className="card-actions justify-end">
-                                    <button className="btn bg-[#00897b] btn-sm text-white hover:bg-[#04342f]">
+                                    <Link to={`/dashboard/payment/${item._id}`}>
+                                    <button
+                                        className="btn bg-[#00897b] btn-sm text-white hover:bg-[#04342f]"
+                                        // onClick={() => handlePayNowClick(item)}
+                                    >
                                         <FaMoneyCheckAlt></FaMoneyCheckAlt> Pay
                                         Now
                                     </button>
+                                    </Link>
                                 </div>
                             </div>
                         </div>
