@@ -5,8 +5,8 @@ import { Fade, JackInTheBox, Roll, Slide } from "react-awesome-reveal";
 
 const SportsActivity = () => {
     return (
-        <div className="container mx-auto my-32">
-            <h1 className="text-center text-4xl font-bold my-20">
+        <div className="container mx-auto my-32 ">
+            <h1 className="text-center text-4xl font-bold my-20 ">
                 Our Sports Activity -{" "}
                 <span style={{ color: "teal", fontWeight: "bold" }}>
                     <Typewriter
@@ -26,11 +26,11 @@ const SportsActivity = () => {
                 <div className="flex flex-col items-center text-center gap-4">
                     <Roll>
                         {" "}
-                        <BiFootball className="text-8xl text-gray-700"></BiFootball>
+                        <BiFootball className="text-8xl text-gray-700 dark:text-white"></BiFootball>
                     </Roll>
                     <h1 className="font-bold text-xl ">Football</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 dark:text-gray-300">
                             Delivering expert coaching and unparalleled skill
                             development.
                         </p>
@@ -43,7 +43,7 @@ const SportsActivity = () => {
 
                     <h1 className="font-bold text-xl ">Rugby</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 dark:text-gray-300">
                             Offering expert instruction and unmatched technique
                             refinement.
                         </p>
@@ -55,7 +55,7 @@ const SportsActivity = () => {
                     </Slide>
                     <h1 className="font-bold text-xl ">Swimming</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 dark:text-gray-300">
                             Providing top-tier coaching and remarkable skill
                             enhancement.
                         </p>
@@ -69,7 +69,7 @@ const SportsActivity = () => {
 
                     <h1 className="font-bold text-xl ">Cricket</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p className="text-gray-500">
+                        <p className="text-gray-500 dark:text-gray-300">
                             Providing elite training and exceptional game
                             strategies.
                         </p>

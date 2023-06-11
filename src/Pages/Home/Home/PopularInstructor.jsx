@@ -41,7 +41,7 @@ const PopularInstructor = () => {
                     <Fade key={item._id}>
                         <div
                            
-                            className="card w-96 bg-base-100 shadow-xl my-10"
+                            className="card w-96 bg-base-100 shadow-xl my-10 p-2 dark:bg-slate-400"
                         >
                             <figure className="avatar">
                                 <div className="w-40 rounded-full">

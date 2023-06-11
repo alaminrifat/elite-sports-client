@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Link, NavLink } from "react-router-dom";
 import { Tooltip } from "react-tooltip";
 import "react-tooltip/dist/react-tooltip.css";
@@ -8,8 +8,11 @@ import "react-toastify/dist/ReactToastify.css";
 import useAdmin from "../../../hook/useAdmin";
 import useInstructor from "../../../hook/useInstructor";
 import useStudent from "../../../hook/useStudent";
+import { useEffect } from "react";
+import logo from '../../../assets/logo_white.png'
 
 const Navbar = () => {
+    const [theme, settheme] = useState("light");
     const { name, user, logOut, photo } = useContext(AuthContext);
     // console.log(name);
     const handleLogout = () => {
@@ -27,6 +30,17 @@ const Navbar = () => {
     const [isInstructor] = useInstructor();
     const [isStudent] = useStudent();
     // console.log(isAdmin, isInstructor, isStudent);
+    useEffect(() => {
+        if (theme === "dark") {
+            document.documentElement.classList.add("dark");
+        } else {
+            document.documentElement.classList.remove("dark");
+        }
+    }, [theme]);
+
+    const handleThemeSwitch = () => {
+        settheme(theme === "dark" ? "light" : "dark");
+    };
 
     const navOptions = (
         <>
@@ -102,12 +116,23 @@ const Navbar = () => {
                     </NavLink>
                 </li>
             )}
+            <li>
+                {/* TODO: implement Dark theme */}
+                <button
+                    className="btn-sm bg-green-200 rounded-3xl text-black"
+                    onClick={handleThemeSwitch}
+                >
+                    {theme==="dark" ? "Light" : "Dark"}
+                </button>
+            </li>
         </>
     );
+
     return (
         <>
             <ToastContainer />
-            <div className="navbar fixed z-10 bg-opacity-60 bg-[#00443d] text-white">
+
+            <div className="navbar fixed z-10 bg-opacity-60 bg-[#00443d] text-white dark:bg-slate-950">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
@@ -136,15 +161,17 @@ const Navbar = () => {
                     <div className="flex items-center gap-4">
                         <Link to={"/"}>
                             <div className="w-16 rounded-full ms-10">
-                                <img src="" className="w-16" />
+                                <img src={logo} className="w-16" />
                             </div>
                         </Link>
                         <Link
                             to={"/"}
                             className="normal-case font-bold md:text-3xl font-cursive text-white whitespace-nowrap"
                         >
+                            
                             Elite Sports Academy
                         </Link>
+                        
                     </div>
                 </div>
                 <div className="navbar-center hidden lg:flex">

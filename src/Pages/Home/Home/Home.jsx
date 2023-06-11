@@ -8,7 +8,7 @@ import SportsActivity from "./SportsActivity";
 const Home = () => {
     setTitle("Home");
     return (
-        <div>
+        <div className="dark:bg-slate-800 dark:text-white">
             <Slider/>
             <SportsActivity/>
             <PopularClasses/>
