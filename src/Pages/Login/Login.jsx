@@ -26,7 +26,7 @@ const Login = () => {
             image: newUser.photoURL,
             role: "student",
         };
-        fetch("http://localhost:5000/users", {
+        fetch("https://elite-sports-academy-server-ten.vercel.app/users", {
             method: "POST",
             headers: {
                 "content-type": "application/json",

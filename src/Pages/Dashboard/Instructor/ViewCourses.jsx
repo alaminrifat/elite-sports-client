@@ -22,7 +22,7 @@ const ViewCourses = () => {
         
     } = useQuery("classes", async () => {
         const response = await axios.get(
-            `http://localhost:5000/all-classes/${user?.email}`,
+            `https://elite-sports-academy-server-ten.vercel.app/all-classes/${user?.email}`,
             {
                 headers: {
                     authorization: `bearer ${localStorage.getItem(

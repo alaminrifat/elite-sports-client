@@ -20,7 +20,7 @@ const CheckOut = ({ price, Class }) => {
     useEffect(() => {
         if (price > 0) {
             axios
-                .post("http://localhost:5000/create-payment-intent", { price })
+                .post("https://elite-sports-academy-server-ten.vercel.app/create-payment-intent", { price })
                 .then((res) => {
                     // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
@@ -85,7 +85,7 @@ const CheckOut = ({ price, Class }) => {
                 date: new Date(),
             };
             axios
-                .post("http://localhost:5000/payments", payment)
+                .post("https://elite-sports-academy-server-ten.vercel.app/payments", payment)
                 .then((res) => {
                     // console.log(res.data);
                     if (res.data.insertedId) {

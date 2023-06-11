@@ -73,7 +73,7 @@ const Register = () => {
                             role: role,
                         };
                         console.log(saveUser);
-                        fetch("http://localhost:5000/users", {
+                        fetch("https://elite-sports-academy-server-ten.vercel.app/users", {
                             method: "POST",
                             headers: {
                                 "content-type": "application/json",

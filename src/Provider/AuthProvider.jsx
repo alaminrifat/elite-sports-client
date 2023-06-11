@@ -54,7 +54,7 @@ const AuthProvider = ({ children }) => {
             setName(loggedUser?.displayName);
 
             if (loggedUser) {
-                axios.post("http://localhost:5000/jwt", {
+                axios.post("https://elite-sports-academy-server-ten.vercel.app/jwt", {
                     email: loggedUser.email,
                 }).then(data => {
                     localStorage.setItem('access-token',data.data.token);

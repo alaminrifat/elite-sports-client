@@ -15,7 +15,7 @@ const PaymentHistory = () => {
         hour12: true,
     };
     useEffect(() => {
-        fetch(`http://localhost:5000/payment-history/${user?.email}`)
+        fetch(`https://elite-sports-academy-server-ten.vercel.app/payment-history/${user?.email}`)
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);

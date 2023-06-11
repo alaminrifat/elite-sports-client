@@ -16,78 +16,122 @@ import ViewCourses from "../Pages/Dashboard/Instructor/ViewCourses";
 import MakePayment from "../Pages/Dashboard/Payment/MakePayment";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
+import AdminRoute from "./AdminRoute";
+import StudentRoute from "./StudentRoute";
+import InstructorRoute from "./InstructorRoute";
+import PrivateRoute from "./PrivateRoute";
 
 export const router = createBrowserRouter([
     {
         path: "/",
         element: <Main></Main>,
-        errorElement:<ErrorPage/>,
-        children:[{
-            path:"/",
-            element:<Home></Home>
-        },
-        {
-            path:'login',
-            element:<Login></Login>
-        },
-        {
-            path:'register',
-            element:<Register></Register>
-        },
-        {
-            path:'classes',
-            element:<Classes/>
-        },
-        {
-            path:'instructors',
-            element:<Instructors/>
-        },
-        
-    ]
-    },{
-        path:'dashboard',
-        element:<Dashboard/>,
-        children:[
+        errorElement: <ErrorPage />,
+        children: [
+            {
+                path: "/",
+                element: <Home></Home>,
+            },
+            {
+                path: "login",
+                element: <Login></Login>,
+            },
+            {
+                path: "register",
+                element: <Register></Register>,
+            },
+            {
+                path: "classes",
+                element: <Classes />,
+            },
+            {
+                path: "instructors",
+                element: <Instructors />,
+            },
+        ],
+    },
+    {
+        path: "dashboard",
+        element: (
+            <PrivateRoute>
+                <Dashboard />
+            </PrivateRoute>
+        ),
+        children: [
             // for students
             {
-                path:'student',
-                element:<StudentDashboard/>
+                path: "student",
+                element: (
+                    <StudentRoute>
+                        <StudentDashboard />
+                    </StudentRoute>
+                ),
             },
             {
-                path:'selectedClasses',
-                element:<SelectedClass></SelectedClass>
+                path: "selectedClasses",
+                element: (
+                    <StudentRoute>
+                        <SelectedClass></SelectedClass>
+                    </StudentRoute>
+                ),
             },
             {
-                path:'enrolledClasses',
-                element:<EnrolledClass></EnrolledClass>
+                path: "enrolledClasses",
+                element: (
+                    <StudentRoute>
+                        <EnrolledClass></EnrolledClass>
+                    </StudentRoute>
+                ),
             },
             {
-                path:'payment/:id',
-                element:<MakePayment></MakePayment>
+                path: "payment/:id",
+                element: (
+                    <StudentRoute>
+                        <MakePayment></MakePayment>
+                    </StudentRoute>
+                ),
             },
             {
-                path:'paymentHistory',
-                element:<PaymentHistory></PaymentHistory>
+                path: "paymentHistory",
+                element: (
+                    <StudentRoute>
+                        <PaymentHistory></PaymentHistory>
+                    </StudentRoute>
+                ),
             },
             // for instructors
             {
-                path:'addCourse',
-                element:<AddCourse></AddCourse>
+                path: "addCourse",
+                element: (
+                    <InstructorRoute>
+                        <AddCourse></AddCourse>
+                    </InstructorRoute>
+                ),
             },
             {
-                path:'viewCourse',
-                element:<ViewCourses></ViewCourses>
+                path: "viewCourse",
+                element: (
+                    <InstructorRoute>
+                        <ViewCourses></ViewCourses>
+                    </InstructorRoute>
+                ),
             },
             // for addmin
             {
-                path:'manageUsers',
-                element:<ManageUsers></ManageUsers>
+                path: "manageUsers",
+                element: (
+                    <AdminRoute>
+                        <ManageUsers></ManageUsers>
+                    </AdminRoute>
+                ),
             },
             {
-                path:'manageClasses',
-                element:<ClassesPage/>
+                path: "manageClasses",
+                element: (
+                    <AdminRoute>
+                        <ClassesPage />
+                    </AdminRoute>
+                ),
             },
-        ]
-    }
-]
-);
+        ],
+    },
+]);

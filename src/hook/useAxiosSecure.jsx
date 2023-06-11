@@ -3,7 +3,7 @@ import { toast } from 'react-toastify';
 
 
 const axiosSecure = axios.create({
-    baseURL: 'http://localhost:5000', 
+    baseURL: 'https://elite-sports-academy-server-ten.vercel.app', 
   });
 
 const useAxiosSecure = () => {

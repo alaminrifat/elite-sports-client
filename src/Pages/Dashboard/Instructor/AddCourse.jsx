@@ -32,10 +32,11 @@ const AddCourse = () => {
         };
         console.log(newClass);
         saveClassToDatabase(newClass);
+        form.reset();
     };
     const saveClassToDatabase = async (newClass) => {
         try {
-            await axios.post("http://localhost:5000/api/classes", newClass);
+            await axios.post("https://elite-sports-academy-server-ten.vercel.app/api/classes", newClass);
             console.log("Class saved to the database:", newClass);
             toast.success(`${newClass.name} saved to the database`);
         } catch (error) {

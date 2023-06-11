@@ -17,7 +17,7 @@ const MakePayment = () => {
 
     useEffect(() => {
         axios
-            .get(`http://localhost:5000/pay/selectedClasses/${id}`)
+            .get(`https://elite-sports-academy-server-ten.vercel.app/pay/selectedClasses/${id}`)
             .then((response) => {
                 const data = response.data;
                 console.log(data);

@@ -47,7 +47,7 @@ const Classes = () => {
             //         }
             //     });
             axiosSecure
-                .post("http://localhost:5000/classes", selectedClass, {
+                .post("https://elite-sports-academy-server-ten.vercel.app/classes", selectedClass, {
                     headers: {
                         authorization: `bearer ${token}`,
                         "Content-Type": "application/json",
@@ -68,7 +68,7 @@ const Classes = () => {
     };
     useEffect(() => {
         axios
-            .get("http://localhost:5000/classes")
+            .get("https://elite-sports-academy-server-ten.vercel.app/classes")
             .then((response) => {
                 setClasses(response.data);
             })
@@ -135,7 +135,7 @@ const Classes = () => {
                             </p>
                             <p className="mt-1.5 text-sm text-gray-700">
                                 Enrolled Students: {""}
-                                {classItem.enrolledStudents}
+                                {classItem.enrolledStudents || 0}
                             </p>
 
                             <div className="mt-4">

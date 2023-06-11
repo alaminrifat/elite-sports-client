@@ -9,9 +9,10 @@ const PopularInstructor = () => {
 
     useEffect(() => {
         axios
-            .get("http://localhost:5000/popularInstructors")
+            .get("https://elite-sports-academy-server-ten.vercel.app/popularInstructors")
             .then((response) => {
                 setPopularInstructors(response.data);
+                console.log(response.data);
             })
             .catch((error) => {
                 console.error("Error fetching popular instructors:", error);
@@ -46,19 +47,19 @@ const PopularInstructor = () => {
                                 <div className="w-40 rounded-full">
                                     <img
                                         // TODO: load dynamic image
-                                        src="https://i.pinimg.com/474x/a1/df/79/a1df7971b2399692675b0e42735bc107.jpg"
+                                        src={item.image}
                                         alt="Shoes"
                                     />
                                 </div>
                             </figure>
 
                             <div className="card-body items-center">
-                                <h2 className="card-title">{item.name} </h2>
+                                <h2 className="card-title">{item?.name} </h2>
                                 <p className="text-sm text-gray-600 ">
-                                    Most Popular Class: {item.classes[0].name}
+                                    Most Popular Class: {item?.course}
                                 </p>
                                 <p className="text-sm text-gray-600 ">
-                                    Total Students: {item.totalStudents}
+                                    Total Students: {item?.totalStudents}
                                 </p>
                             </div>
                         </div>

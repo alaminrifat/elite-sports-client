@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import TopBanner from "../Class/TopBanner";
+import TopBannerInstructor from "../Class/TopBannerInstructor";
 
 const Instructors = () => {
     const [instructors, setInstructors] = useState([]);
@@ -10,7 +10,7 @@ const Instructors = () => {
 
     const fetchInstructors = async () => {
         try {
-            const response = await fetch("http://localhost:5000/instructors");
+            const response = await fetch("https://elite-sports-academy-server-ten.vercel.app/instructors");
             const data = await response.json();
             // console.log(data);
             setInstructors(data);
@@ -20,7 +20,7 @@ const Instructors = () => {
                 data.map(async (instructor) => {
                     try {
                         const classCountResponse = await fetch(
-                            `http://localhost:5000/classes/count/${encodeURIComponent(
+                            `https://elite-sports-academy-server-ten.vercel.app/classes/count/${encodeURIComponent(
                                 instructor.name
                             )}`
                         );
@@ -47,7 +47,7 @@ const Instructors = () => {
 
     return (
         <>
-            <TopBanner></TopBanner>
+            <TopBannerInstructor></TopBannerInstructor>
             <div className="container mx-auto ">
                 <p className="text-4xl font-semibold text-center p-20 ">
                     Our Instructors
