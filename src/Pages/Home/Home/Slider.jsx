@@ -31,7 +31,7 @@ const Slider = () => {
                 <SwiperSlide>
                     <figure className="relative">
                         <img
-                            src="https://i.ibb.co/p0fG3tz/banner1.jpg"
+                            src="https://images.unsplash.com/photo-1519921073932-251ce805ce3e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1174&q=80"
                             alt=""
                             className="w-full"
                         />
@@ -46,7 +46,7 @@ const Slider = () => {
                 <SwiperSlide>
                     <figure className="relative">
                         <img
-                            src="https://i.ibb.co/p0fG3tz/banner1.jpg"
+                            src="https://images.unsplash.com/photo-1485313260896-6e6edf486858?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
                             alt=""
                             className="w-full"
                         />
@@ -61,7 +61,7 @@ const Slider = () => {
                 <SwiperSlide>
                     <figure className="relative">
                         <img
-                            src="https://i.ibb.co/p0fG3tz/banner1.jpg"
+                            src="https://images.unsplash.com/photo-1484482340112-e1e2682b4856?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1176&q=80"
                             alt=""
                             className="w-full"
                         />

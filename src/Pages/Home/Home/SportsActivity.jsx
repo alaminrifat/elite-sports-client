@@ -26,11 +26,11 @@ const SportsActivity = () => {
                 <div className="flex flex-col items-center text-center gap-4">
                     <Roll>
                         {" "}
-                        <BiFootball className="text-8xl"></BiFootball>
+                        <BiFootball className="text-8xl text-gray-700"></BiFootball>
                     </Roll>
-                    <h1>Football</h1>
+                    <h1 className="font-bold text-xl ">Football</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p>
+                        <p className="text-gray-500">
                             Delivering expert coaching and unparalleled skill
                             development.
                         </p>
@@ -38,12 +38,12 @@ const SportsActivity = () => {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                     <JackInTheBox>
-                        <FaFootballBall className="text-8xl"></FaFootballBall>
+                        <FaFootballBall className="text-8xl text-amber-900"></FaFootballBall>
                     </JackInTheBox>
 
-                    <h1>Rugby</h1>
+                    <h1 className="font-bold text-xl ">Rugby</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p>
+                        <p className="text-gray-500">
                             Offering expert instruction and unmatched technique
                             refinement.
                         </p>
@@ -51,11 +51,11 @@ const SportsActivity = () => {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                     <Slide direction="right">
-                        <FaSwimmer className="text-8xl"></FaSwimmer>
+                        <FaSwimmer className="text-8xl text-blue-500"></FaSwimmer>
                     </Slide>
-                    <h1>Swimming</h1>
+                    <h1 className="font-bold text-xl ">Swimming</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p>
+                        <p className="text-gray-500">
                             Providing top-tier coaching and remarkable skill
                             enhancement.
                         </p>
@@ -64,12 +64,12 @@ const SportsActivity = () => {
                 <div className="flex flex-col items-center text-center gap-4">
                     <Roll direction="left">
                         {" "}
-                        <BiCricketBall className="text-8xl"></BiCricketBall>
+                        <BiCricketBall className="text-8xl text-red-500"></BiCricketBall>
                     </Roll>
 
-                    <h1>Cricket</h1>
+                    <h1 className="font-bold text-xl ">Cricket</h1>
                     <Fade delay={2} cascade damping={0.1}>
-                        <p>
+                        <p className="text-gray-500">
                             Providing elite training and exceptional game
                             strategies.
                         </p>

@@ -4,6 +4,7 @@ import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import setTitle from "../../hook/setTitle";
+import TopBanner from "./TopBanner";
 
 const Classes = () => {
     setTitle("Classes");
@@ -59,8 +60,11 @@ const Classes = () => {
     }, [axiosSecure]);
     return (
         <div>
+            <TopBanner></TopBanner>
             {/* Banner */}
             {/* TODO: Implment type writter / animation  */}
+            <h1 className="text-center text-4xl font-bold my-20">
+                Our Sports Classes</h1>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ms-2 lg:ms-8 me-2 lg:me-8">
                 {classes.map((classItem) => (
                     <div
