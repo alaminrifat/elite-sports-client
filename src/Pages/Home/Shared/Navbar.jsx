@@ -5,6 +5,9 @@ import "react-tooltip/dist/react-tooltip.css";
 import { AuthContext } from "../../../Provider/AuthProvider";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import useAdmin from "../../../hook/useAdmin";
+import useInstructor from "../../../hook/useInstructor";
+import useStudent from "../../../hook/useStudent";
 
 const Navbar = () => {
     const { name, user, logOut, photo } = useContext(AuthContext);
@@ -20,6 +23,10 @@ const Navbar = () => {
             });
     };
     //
+    const [isAdmin] = useAdmin();
+    const [isInstructor] = useInstructor();
+    const [isStudent] = useStudent();
+    // console.log(isAdmin, isInstructor, isStudent);
 
     const navOptions = (
         <>
@@ -41,14 +48,37 @@ const Navbar = () => {
                     Classes
                 </NavLink>{" "}
             </li>
-            <li>
-                <NavLink
-                    to="/dashboard"
-                    className={({ isActive }) => (isActive ? "active" : "")}
-                >
-                    Dashboard
-                </NavLink>
-            </li>
+
+            {isAdmin && (
+                <li>
+                    <NavLink
+                        to="/dashboard/manageUsers"
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
+            )}
+            {isInstructor && (
+                <li>
+                    <NavLink
+                        to="/dashboard/viewCourse"
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
+            )}
+            {isStudent && (
+                <li>
+                    <NavLink
+                        to="/dashboard/selectedClasses"
+                        className={({ isActive }) => (isActive ? "active" : "")}
+                    >
+                        Dashboard
+                    </NavLink>
+                </li>
+            )}
             {user ? (
                 <li>
                     <button onClick={handleLogout}>Logout</button>

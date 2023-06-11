@@ -5,6 +5,7 @@ import { useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import setTitle from "../../hook/setTitle";
 import TopBanner from "./TopBanner";
+import axios from "axios";
 
 const Classes = () => {
     setTitle("Classes");
@@ -13,7 +14,6 @@ const Classes = () => {
     const navigate = useNavigate();
     const token = localStorage.getItem("access-token");
     const axiosSecure = useAxiosSecure();
-
     const handleSelect = (classItem) => {
         if (!user) {
             toast.error("You need to login to select a class", {
@@ -27,20 +27,38 @@ const Classes = () => {
                 status: "unpaid",
             };
             // console.log(selectedClass);
-            fetch("http://localhost:5000/classes", {
-                method: "POST",
-                headers: {
-                    authorization: `bearer ${token}`,
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify(selectedClass),
-            })
-                .then((res) => res.json())
-                .then((data) => {
+            // fetch("http://localhost:5000/classes", {
+            //     method: "POST",
+            //     headers: {
+            //         authorization: `bearer ${token}`,
+            //         "Content-Type": "application/json",
+            //     },
+            //     body: JSON.stringify(selectedClass),
+            // })
+            //     .then((res) => res.json())
+            //     .then((data) => {
+            //         // console.log(data);
+            //         if (data.insertedId) {
+            //             toast.success(
+            //                 "Class is selected, pay to enroll the class"
+            //             );
+            //         } else {
+            //             toast.error("This class has already been selected");
+            //         }
+            //     });
+            axiosSecure
+                .post("http://localhost:5000/classes", selectedClass, {
+                    headers: {
+                        authorization: `bearer ${token}`,
+                        "Content-Type": "application/json",
+                    },
+                })
+                .then((response) => {
+                    const data = response.data;
                     // console.log(data);
                     if (data.insertedId) {
                         toast.success(
-                            "Class is selected, pay to enroll the class"
+                            "Class is selected, pay to enroll in the class"
                         );
                     } else {
                         toast.error("This class has already been selected");
@@ -49,22 +67,37 @@ const Classes = () => {
         }
     };
     useEffect(() => {
-        axiosSecure
-            .get("/classes")
-            .then((data) => {
-                setClasses(data.data);
+        axios
+            .get("http://localhost:5000/classes")
+            .then((response) => {
+                setClasses(response.data);
             })
             .catch((error) => {
                 console.error("Error fetching classes:", error);
             });
-    }, [axiosSecure]);
+        // fetch("http://localhost:5000/classes")
+        //     .then((response) => {
+        //         if (!response.ok) {
+        //             throw new Error("Error fetching classes");
+        //         }
+        //         return response.json();
+        //     })
+        //     .then((data) => {
+        //         setClasses(data);
+        //     })
+        //     .catch((error) => {
+        //         console.error("Error fetching classes:", error);
+        //     });
+    }, []);
+
     return (
         <div>
             <TopBanner></TopBanner>
             {/* Banner */}
             {/* TODO: Implment type writter / animation  */}
             <h1 className="text-center text-4xl font-bold my-20">
-                Our Sports Classes</h1>
+                Our Sports Classes
+            </h1>
             <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-6 ms-2 lg:ms-8 me-2 lg:me-8">
                 {classes.map((classItem) => (
                     <div
@@ -84,8 +117,8 @@ const Classes = () => {
                                     : "bg-white"
                             }`}
                         >
-                            <span className="whitespace-nowrap bg-[#00897b] text-white   px-3 py-1.5 text-xs font-medium">
-                                New
+                            <span className="whitespace-nowrap bg-[#00897b] text-white   px-3 py-1.5  font-medium">
+                                ${classItem.price}
                             </span>
 
                             <h3 className="mt-4 text-lg font-medium text-gray-900">
@@ -101,7 +134,8 @@ const Classes = () => {
                                 {classItem.availableSeats}
                             </p>
                             <p className="mt-1.5 text-sm text-gray-700">
-                                ${classItem.price}
+                                Enrolled Students: {""}
+                                {classItem.enrolledStudents}
                             </p>
 
                             <div className="mt-4">

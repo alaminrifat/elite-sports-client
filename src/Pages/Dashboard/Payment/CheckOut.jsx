@@ -16,18 +16,17 @@ const CheckOut = ({ price,Class }) => {
     const stripe = useStripe();
     const elements = useElements();
     const { user } = useContext(AuthContext);
-    const amount = parseFloat(price.toFixed(2));
 
     useEffect(() => {
-        if (amount > 0) {
+        if (price > 0) {
             axios
-                .post("http://localhost:5000/create-payment-intent", { amount })
+                .post("http://localhost:5000/create-payment-intent", { price })
                 .then((res) => {
                     // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
                 });
         }
-    }, [amount]);
+    }, [price]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();

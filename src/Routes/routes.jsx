@@ -15,6 +15,7 @@ import ManageUsers from "../Pages/Dashboard/Admin/ManageUsers";
 import ViewCourses from "../Pages/Dashboard/Instructor/ViewCourses";
 import MakePayment from "../Pages/Dashboard/Payment/MakePayment";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import PaymentHistory from "../Pages/Dashboard/Payment/PaymentHistory";
 
 export const router = createBrowserRouter([
     {
@@ -63,6 +64,10 @@ export const router = createBrowserRouter([
             {
                 path:'payment/:id',
                 element:<MakePayment></MakePayment>
+            },
+            {
+                path:'paymentHistory',
+                element:<PaymentHistory></PaymentHistory>
             },
             // for instructors
             {

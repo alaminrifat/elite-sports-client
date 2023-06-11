@@ -55,17 +55,17 @@ const PopularClasses = () => {
                                 </div>
 
                                 <div className="mt-2 flex items-center gap-1 text-xs">
-                                    Instructor:<p> {item.instructor}</p>
+                                    Instructor:<span> {item.instructor}</span>
                                 </div>
                                 <div className="mt-1 flex justify-start gap-10 text-gray-500 ">
-                                    <p className="flex items-center gap-1 text-xs">
+                                    <span className="flex items-center gap-1 text-xs">
                                         Enrolled Students:
                                         <p> {item.enrolledStudents}</p>
-                                    </p>
-                                    <p className="flex items-center gap-1 text-xs">
+                                    </span>
+                                    <span className="flex items-center gap-1 text-xs">
                                         Available Seat:
-                                        <p> {item.availableSeats}</p>
-                                    </p>
+                                        <span> {item.availableSeats}</span>
+                                    </span>
                                 </div>
                             </div>
                         </div>
