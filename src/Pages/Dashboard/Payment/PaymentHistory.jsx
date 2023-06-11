@@ -41,15 +41,6 @@ const PaymentHistory = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {/* id: '6485ecc7fea4de77d33f5cf9',
-      user: 'alaminrifat.aiub@gmail.com',
-      trxID: 'pi_3NHqUtENCSqb3QiS0pQPqa1E',
-      selectedCourseID: '6485ecacfea4de77d33f5cf8',
-      courseId: '6480ad099b5300b1db1ee6c5',
-      courseName: 'Course F',
-      instructor: 'Sarah Anderson',
-      price: 129.99,
-      date: '2023-06-11T15:48:23.514Z' */}
                         {/* row 1 */}
                         {payments.map((payment, index) => (
                             <tr key={payment._id}>

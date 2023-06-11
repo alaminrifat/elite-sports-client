@@ -51,7 +51,7 @@ const SportsActivity = () => {
                 </div>
                 <div className="flex flex-col items-center text-center gap-4">
                     <Slide direction="right">
-                        <FaSwimmer className="text-8xl text-blue-500"></FaSwimmer>
+                        <FaSwimmer className="text-8xl text-blue-700"></FaSwimmer>
                     </Slide>
                     <h1 className="font-bold text-xl ">Swimming</h1>
                     <Fade delay={2} cascade damping={0.1}>
@@ -64,7 +64,7 @@ const SportsActivity = () => {
                 <div className="flex flex-col items-center text-center gap-4">
                     <Roll direction="left">
                         {" "}
-                        <BiCricketBall className="text-8xl text-red-500"></BiCricketBall>
+                        <BiCricketBall className="text-8xl text-red-700"></BiCricketBall>
                     </Roll>
 
                     <h1 className="font-bold text-xl ">Cricket</h1>

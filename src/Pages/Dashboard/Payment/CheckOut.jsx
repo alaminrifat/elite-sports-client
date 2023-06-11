@@ -5,9 +5,9 @@ import { AuthContext } from "../../../Provider/AuthProvider";
 import { useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
-// import { loadStripe } from "@stripe/stripe-js";
+import "./Cardstyle.css";
 
-const CheckOut = ({ price,Class }) => {
+const CheckOut = ({ price, Class }) => {
     const [cardError, setCardError] = useState("");
     const [clientSecret, setClientSecret] = useState("");
     const [processing, setProcessing] = useState(false);
@@ -53,7 +53,7 @@ const CheckOut = ({ price,Class }) => {
             console.log(paymentMethod);
             setCardError("");
         }
-        setProcessing(true)
+        setProcessing(true);
         const { paymentIntent, error: confirmError } =
             await stripe.confirmCardPayment(clientSecret, {
                 payment_method: {
@@ -70,36 +70,41 @@ const CheckOut = ({ price,Class }) => {
         }
 
         // console.log("payment intent", paymentIntent);
-        setProcessing(false)
+        setProcessing(false);
         if (paymentIntent.status === "succeeded") {
             setTransactionId(paymentIntent.id);
-            // store payment information to the database 
+            // store payment information to the database
             const payment = {
-              user: user?.email,
-              trxID : paymentIntent.id,
-              selectedCourseID: Class._id,
-              courseId: Class.course._id,
-              courseName: Class.course.name,
-              instructor: Class.course.instructor,
-              price: Class.course.price,
-              date: new Date(),
-            }
-            axios.post('http://localhost:5000/payments',payment).then(res =>{
-              // console.log(res.data);
-              if(res.data.insertedId){
-                toast.success('Payment Success!!')
-              }
-            })
+                user: user?.email,
+                trxID: paymentIntent.id,
+                selectedCourseID: Class._id,
+                courseId: Class.course._id,
+                courseName: Class.course.name,
+                instructor: Class.course.instructor,
+                price: Class.course.price,
+                date: new Date(),
+            };
+            axios
+                .post("http://localhost:5000/payments", payment)
+                .then((res) => {
+                    // console.log(res.data);
+                    if (res.data.insertedId) {
+                        toast.success("Payment Success!!");
+                    }
+                });
         }
     };
 
     return (
         <div className="container mx-auto">
-          <ToastContainer></ToastContainer>
-            <h1 className="text-4xl text-center font-bold mt-6">
+            <ToastContainer></ToastContainer>
+            <h1 className="text-4xl text-center font-bold mt-16">
                 Make Payment
             </h1>
-            <form className="w-2/3 m-8" onSubmit={handleSubmit}>
+            <form
+                className="w-2/3 mx-auto mt-32  p-16 bg-slate-100 shadow-lg"
+                onSubmit={handleSubmit}
+            >
                 <CardElement
                     options={{
                         style: {
@@ -117,15 +122,27 @@ const CheckOut = ({ price,Class }) => {
                     }}
                 />
                 <button
-                    className="btn btn-primary btn-sm mt-4"
+                    className="btn btn-success text-white btn-sm mt-4"
                     type="submit"
-                    disabled={!stripe || processing || !clientSecret}
+                    disabled={!stripe || processing || !clientSecret || transactionId}
                 >
                     Pay
                 </button>
+
+                {cardError && (
+                    <div className="alert alert-error text-w shadow-lg mt-6">
+                        <p className="p-1">{cardError}</p>{" "}
+                    </div>
+                )}
+                {transactionId && (
+                    <div className="alert alert-success text-w shadow-lg mt-6">
+                        <p className="p-1">
+                            Transaction complete with transactionId:{" "}
+                            <span className="font-bold ">{transactionId}</span>
+                        </p>
+                    </div>
+                )}
             </form>
-            {cardError && <p className="text-red-600 ml-8">{cardError}</p>}
-            {transactionId && <p className="text-green-500">Transaction complete with transactionId: {transactionId}</p>}
         </div>
     );
 };

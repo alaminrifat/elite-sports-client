@@ -32,7 +32,7 @@ const Register = () => {
         const photo = data.photoURL;
         const email = data.email;
         const password = data.password;
-        const role = "Student";
+        const role = "student";
 
         // Perform input validation
         if (!email || !password) {
@@ -69,6 +69,7 @@ const Register = () => {
                         const saveUser = {
                             name: name,
                             email: email,
+                            image: photo,
                             role: role,
                         };
                         console.log(saveUser);
@@ -87,6 +88,7 @@ const Register = () => {
                                     toast.success(
                                         "Account Created! Now Please Login"
                                     );
+
                                     reset();
                                     logOut();
                                     navigate("/login");

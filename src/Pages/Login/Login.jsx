@@ -23,6 +23,7 @@ const Login = () => {
         const user = {
             name: newUser.displayName,
             email: newUser.email,
+            image: newUser.photoURL,
             role: "student",
         };
         fetch("http://localhost:5000/users", {

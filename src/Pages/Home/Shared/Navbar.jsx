@@ -48,6 +48,15 @@ const Navbar = () => {
                     Classes
                 </NavLink>{" "}
             </li>
+            <li>
+                {" "}
+                <NavLink
+                    to="/instructors"
+                    className={({ isActive }) => (isActive ? "active" : "")}
+                >
+                    Instructors
+                </NavLink>{" "}
+            </li>
 
             {isAdmin && (
                 <li>

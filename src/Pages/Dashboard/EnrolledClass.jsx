@@ -1,9 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
-import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
 import useAxiosSecure from "../../hook/useAxiosSecure";
-
 
 const EnrolledClass = () => {
     const { user } = useContext(AuthContext);
@@ -29,10 +27,11 @@ const EnrolledClass = () => {
     }, [axiosSecure, user]);
 
     return (
-        <>
-            <h1 className="text-4xl container mx-auto mt-4">
-                Your Selected Class
+        <div className="container mx-auto">
+            <h1 className="text-4xl font-bold my-10 text-center">
+                Your Enrolled Classes
             </h1>
+
             {isLoading ? (
                 <div className="h-[600px] flex items-center justify-center">
                     <FadeLoader color="#36d7b7" />
@@ -61,7 +60,7 @@ const EnrolledClass = () => {
                     ))}
                 </div>
             )}
-        </>
+        </div>
     );
 };
 
