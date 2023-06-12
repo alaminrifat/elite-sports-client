@@ -5,7 +5,7 @@ import { Fade, JackInTheBox, Roll, Slide } from "react-awesome-reveal";
 
 const SportsActivity = () => {
     return (
-        <div className="container mx-auto my-32 px-2">
+        <div className="container mx-auto my-32 p-2 ">
             <h1 className="text-center text-4xl font-bold my-20">
                 Our Sports Activity{" "}
                 <span style={{ color: "teal", fontWeight: "bold" }}>
@@ -21,7 +21,7 @@ const SportsActivity = () => {
                     />
                 </span>
             </h1>
-            <div className="flex flex-col md:flex-row justify-around gap-4 flex-wrap">
+            <div className="flex flex-col md:flex-row justify-around gap-4 ">
                 <div className="flex flex-col items-center text-center gap-4 w-full md:w-1/4 lg:w-1/4">
                     <Roll>
                         <BiFootball className="text-8xl text-gray-700 dark:text-white" />

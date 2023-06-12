@@ -1,4 +1,5 @@
 import logo from "../../../assets/logo_white.png";
+
 const Footer = () => {
     return (
         <div>
@@ -50,10 +51,28 @@ const Footer = () => {
                     </div>
                 </div>
                 <div className="items-center grid-flow-col">
-                    <p className="ms-8">
-                        Copyright © 2023 - All right reserved
-                    </p>
+                    <div className="flex flex-col items-center md:flex-row gap-8">
+                        <div>
+                            <span className="footer-title">Address</span>
+                            <p className="text-white mt-4 dark:text-gray-300">
+                                123 Sports Street,
+                                <br />
+                                Port Arthur,
+                                <br />
+                                Texas , USA
+                            </p>
+                        </div>
+                        <div>
+                            <span className="footer-title">Contact</span>
+                            <p className="text-white mt-4 dark:text-gray-300">
+                                Phone: +1 234 567 890
+                                <br />
+                                Email: info@esa.com
+                            </p>
+                        </div>
+                    </div>
                 </div>
+                <p className="ms-8">Copyright © 2023 - All right reserved</p>
             </footer>
         </div>
     );

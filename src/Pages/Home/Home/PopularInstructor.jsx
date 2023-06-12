@@ -38,7 +38,7 @@ const PopularInstructor = () => {
                     />
                 </span>
             </h1>
-            <div className="grid grid-cols-1 md:grid-cols-3">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 my-4">
                 {popularInstructors.map((item) => (
                     <Fade key={item._id}>
                         <div className="card bg-base-100 shadow-xl my-10 p-2 dark:bg-slate-400">
