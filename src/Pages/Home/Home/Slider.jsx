@@ -37,7 +37,7 @@ const Slider = () => {
                         />
                         <div className="absolute inset-0 bg-black opacity-70"></div>
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-                            <h1 className="text-white text-2xl md:text-8xl font-bold">
+                            <h1 className="text-white text-2xl md:text-8xl font-bold dark:text-slate-400">
                                 Welcome to Best Summer <br /> Sports Academy
                             </h1>
                         </div>
@@ -52,7 +52,7 @@ const Slider = () => {
                         />
                         <div className="absolute inset-0 bg-black opacity-70"></div>
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-                            <h1 className="text-white text-2xl md:text-8xl font-bold">
+                            <h1 className="text-white text-2xl md:text-8xl font-bold dark:text-slate-400">
                                 Welcome to Best Summer <br /> Sports Academy
                             </h1>
                         </div>
@@ -67,7 +67,7 @@ const Slider = () => {
                         />
                         <div className="absolute inset-0 bg-black opacity-70"></div>
                         <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-center z-10">
-                            <h1 className="text-white text-2xl md:text-8xl font-bold">
+                            <h1 className="text-white text-2xl md:text-8xl font-bold dark:text-slate-400">
                                 Welcome to Best Summer <br /> Sports Academy
                             </h1>
                         </div>

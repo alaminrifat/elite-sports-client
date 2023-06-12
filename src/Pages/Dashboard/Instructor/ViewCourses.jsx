@@ -5,8 +5,10 @@ import { useQuery } from "react-query";
 import { FadeLoader } from "react-spinners";
 import { ToastContainer } from "react-toastify";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import setTitle from "../../../hook/setTitle";
 
 const ViewCourses = () => {
+    setTitle("Your Courses")
     const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
     const [feedbackMessage, setFeedbackMessage] = useState("");
     const { user } = useContext(AuthContext);

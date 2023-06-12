@@ -1,12 +1,14 @@
 import { useEffect, useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import setTitle from "../../../hook/setTitle";
 
 const ClassesPage = () => {
+    setTitle("Classes");
     const [classes, setClasses] = useState([]);
     const [feedbackModalOpen, setFeedbackModalOpen] = useState(false);
     const [selectedClass, setSelectedClass] = useState(null);
     const [feedbackMessage, setFeedbackMessage] = useState("");
-
+    const token = localStorage.getItem("access-token");
     useEffect(() => {
         fetchClasses();
     }, [classes]);
@@ -14,6 +16,9 @@ const ClassesPage = () => {
     const fetchClasses = () => {
         fetch("https://elite-sports-academy-server-ten.vercel.app/all-classes", {
             method: "GET",
+            headers:{
+                authorization: `bearer ${token}`,
+            },
         })
             .then((res) => res.json())
             .then((data) => {
@@ -26,6 +31,9 @@ const ClassesPage = () => {
             await fetch(
                 `https://elite-sports-academy-server-ten.vercel.app/api/classes/${classId}/approve`,
                 {
+                    headers:{
+                        authorization: `bearer ${token}`,
+                    },
                     method: "PATCH",
                 }
             )
@@ -45,6 +53,9 @@ const ClassesPage = () => {
         try {
             await fetch(`https://elite-sports-academy-server-ten.vercel.app/api/classes/${classId}/deny`, {
                 method: "PATCH",
+                headers:{
+                    authorization: `bearer ${token}`,
+                }
             })
                 .then((res) => res.json())
                 .then((data) => {
@@ -78,6 +89,7 @@ const ClassesPage = () => {
                 {
                     method: "POST",
                     headers: {
+                        authorization: `bearer ${token}`,
                         "Content-Type": "application/json",
                     },
                     body: JSON.stringify({ feedback: feedbackMessage }),
@@ -95,8 +107,8 @@ const ClassesPage = () => {
     return (
         <div>
             <ToastContainer></ToastContainer>
-            <h1 className="text-4xl font-bold my-10 text-center">Classes</h1>
-            <div className="container mx-auto overflow-x-auto">
+            <h1 className="text-4xl font-bold my-10 text-center">Manage Classes</h1>
+            <div className="overflow-x-auto w-9/12 mx-auto">
                 <table className="table">
                     {/* head */}
                     <thead className="text-lg font-semibold">
@@ -157,16 +169,16 @@ const ClassesPage = () => {
                                     {item.status}
                                 </td>
 
-                                <th>
+                                <th className="flex justify-center items-center">
                                     <button
-                                        className="btn btn-success btn-xs text-white me-2"
+                                        className="btn btn-success btn-xs text-white me-1"
                                         onClick={() => handleApprove(item._id)}
                                         disabled={item.status === "approved"}
                                     >
                                         approve
                                     </button>
                                     <button
-                                        className="btn btn-error btn-xs text-white me-2"
+                                        className="btn btn-error btn-xs text-white me-1"
                                         onClick={() => handleDeny(item._id)}
                                         disabled={item.status === "denied"}
                                     >

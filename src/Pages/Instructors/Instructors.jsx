@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import TopBannerInstructor from "../Class/TopBannerInstructor";
+import setTitle from "../../hook/setTitle";
 
 const Instructors = () => {
+    setTitle("Instructor");
     const [instructors, setInstructors] = useState([]);
 
     useEffect(() => {
@@ -56,14 +58,14 @@ const Instructors = () => {
                     {instructors.map((instructor) => (
                         <div
                             key={instructor._id}
-                            className="card card-side bg-base-100 shadow-xl"
+                            className="group card card-side bg-base-100 shadow-xl"
                         >
                             <figure className="w-[250px]">
                                 <img
                                     // TODO: set and get Instructor image
                                     src={instructor.image}
                                     alt=""
-                                    className="p-4 rounded-3xl"
+                                    className="h-64 w-full object-cover transition duration-500 group-hover:scale-105 sm:h-72 rounded-b-lg"
                                 />
                             </figure>
                             <div className="card-body ">

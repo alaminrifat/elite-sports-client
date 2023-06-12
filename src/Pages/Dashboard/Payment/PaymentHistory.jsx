@@ -2,8 +2,11 @@ import { useContext } from "react";
 import { useEffect } from "react";
 import { useState } from "react";
 import { AuthContext } from "../../../Provider/AuthProvider";
+import setTitle from "../../../hook/setTitle";
 
 const PaymentHistory = () => {
+    const token = localStorage.getItem("access-token");
+    setTitle("Payment History");
     const [payments, setPayments] = useState([]);
     const { user } = useContext(AuthContext);
     const options = {
@@ -15,13 +18,20 @@ const PaymentHistory = () => {
         hour12: true,
     };
     useEffect(() => {
-        fetch(`https://elite-sports-academy-server-ten.vercel.app/payment-history/${user?.email}`)
+        fetch(
+            `https://elite-sports-academy-server-ten.vercel.app/payment-history/${user?.email}`,
+            {
+                headers: {
+                    authorization: `bearer ${token}`,
+                },
+            }
+        )
             .then((res) => res.json())
             .then((data) => {
                 console.log(data);
                 setPayments(data);
             });
-    }, [user]);
+    }, [user,token]);
     return (
         <div className="container mx-auto">
             <h1 className="text-4xl font-bold my-10 text-center">

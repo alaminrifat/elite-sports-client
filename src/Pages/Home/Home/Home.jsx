@@ -1,4 +1,5 @@
 import setTitle from "../../../hook/setTitle";
+import Feedback from "./Feedback";
 import PopularClasses from "./PopularClasses";
 import PopularInstructor from "./PopularInstructor";
 import Slider from "./Slider";
@@ -13,6 +14,8 @@ const Home = () => {
             <SportsActivity/>
             <PopularClasses/>
             <PopularInstructor/>
+            <h1 className="text-center mt-20 font-bold text-4xl text-gray-700 dark:text-white">What our customer say!</h1>
+            <Feedback/>
         </div>
     );
 };

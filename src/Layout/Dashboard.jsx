@@ -11,15 +11,16 @@ import {
     FaUserFriends,
     FaUserGraduate,
 } from "react-icons/fa";
-import { MdClass, MdLibraryAdd, MdLibraryBooks, MdOutlineClass, MdPayment } from "react-icons/md";
+import { MdClass, MdLibraryAdd, MdLibraryBooks,  MdPayment } from "react-icons/md";
+import setTitle from "../hook/setTitle";
 
 const Dashboard = () => {
-    // TODO: load data from the server to have dynamic isAdmin based on Data
-    // const isAdmin = true;
+    setTitle("Dashboard");
+    
     const [isAdmin] = useAdmin();
     const [isInstructor] = useInstructor();
     const [isStudent] = useStudent();
-    console.log(isAdmin, isInstructor, isStudent);
+    // console.log(isAdmin, isInstructor, isStudent);
 
     const { logOut, user } = useContext(AuthContext);
     const navigate = useNavigate();

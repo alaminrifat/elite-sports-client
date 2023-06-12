@@ -2,8 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Provider/AuthProvider";
 import { FadeLoader } from "react-spinners";
 import useAxiosSecure from "../../hook/useAxiosSecure";
+import setTitle from "../../hook/setTitle";
 
 const EnrolledClass = () => {
+    setTitle("Enrolled Classes");
     const { user } = useContext(AuthContext);
     const [selectedClass, setSelectedClass] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -44,7 +46,9 @@ const EnrolledClass = () => {
                             className="card w-96 bg-base-100 shadow-xl"
                         >
                             <figure>
-                                <img src={item.course.image} alt="Shoes" />
+                                <img src={item.course.image} alt=""
+                                className="h-64 w-full object-cover transition duration-500  sm:h-72 rounded-b-lg" />
+                                
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">

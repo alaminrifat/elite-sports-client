@@ -14,10 +14,15 @@ const MakePayment = () => {
     const axiosSecure = useAxiosSecure();
     const [price, setprice] = useState(0);
     const { id } = useParams();
-
+    const token = localStorage.getItem("access-token");
     useEffect(() => {
         axios
-            .get(`https://elite-sports-academy-server-ten.vercel.app/pay/selectedClasses/${id}`)
+            .get(`https://elite-sports-academy-server-ten.vercel.app/pay/selectedClasses/${id}`,{
+                headers: {
+                    authorization: `bearer ${token}`,
+                    "Content-Type": "application/json",
+                },
+            })
             .then((response) => {
                 const data = response.data;
                 console.log(data);
@@ -27,7 +32,7 @@ const MakePayment = () => {
             .catch((error) => {
                 console.error("Error fetching selected classes:", error);
             });
-    }, [axiosSecure, id]);
+    }, [axiosSecure, id,token]);
 
     return (
         <Elements stripe={stripePromise}>

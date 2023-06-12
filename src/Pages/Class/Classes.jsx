@@ -47,12 +47,16 @@ const Classes = () => {
             //         }
             //     });
             axiosSecure
-                .post("https://elite-sports-academy-server-ten.vercel.app/classes", selectedClass, {
-                    headers: {
-                        authorization: `bearer ${token}`,
-                        "Content-Type": "application/json",
-                    },
-                })
+                .post(
+                    "https://elite-sports-academy-server-ten.vercel.app/classes",
+                    selectedClass,
+                    {
+                        headers: {
+                            authorization: `bearer ${token}`,
+                            "Content-Type": "application/json",
+                        },
+                    }
+                )
                 .then((response) => {
                     const data = response.data;
                     // console.log(data);
@@ -68,7 +72,11 @@ const Classes = () => {
     };
     useEffect(() => {
         axios
-            .get("https://elite-sports-academy-server-ten.vercel.app/classes")
+            .get("https://elite-sports-academy-server-ten.vercel.app/classes", {
+                headers: {
+                    authorization: `bearer ${token}`,
+                },
+            })
             .then((response) => {
                 setClasses(response.data);
             })

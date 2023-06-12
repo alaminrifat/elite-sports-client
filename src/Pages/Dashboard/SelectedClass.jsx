@@ -4,8 +4,11 @@ import { FaMoneyCheckAlt } from "react-icons/fa";
 import { FadeLoader } from "react-spinners";
 import useAxiosSecure from "../../hook/useAxiosSecure";
 import { Link } from "react-router-dom";
+import setTitle from "../../hook/setTitle";
+import { toast } from "react-toastify";
 
 const SelectedClass = () => {
+    setTitle("Selected Class");
     const { user } = useContext(AuthContext);
     const [selectedClass, setSelectedClass] = useState([]);
     const [isLoading, setIsLoading] = useState(false);
@@ -13,8 +16,14 @@ const SelectedClass = () => {
 
     useEffect(() => {
         setIsLoading(true);
+        fetchData();
+    }, [axiosSecure, user]);
+
+    const fetchData = () => {
         axiosSecure
-            .get(`https://elite-sports-academy-server-ten.vercel.app/selectedClasses/${user?.email}`)
+            .get(
+                `https://elite-sports-academy-server-ten.vercel.app/selectedClasses/${user?.email}`
+            )
             .then((response) => {
                 const data = response.data;
                 // console.log(data);
@@ -26,8 +35,22 @@ const SelectedClass = () => {
             .catch((error) => {
                 console.error("Error fetching selected classes:", error);
             });
-    }, [axiosSecure, user]);
-
+    };
+    const handleDelete = (id) => {
+        console.log(id);
+        axiosSecure
+            .delete(
+                `https://elite-sports-academy-server-ten.vercel.app/deleteSelected/${id}`
+            )
+            .then((response) => {
+                console.log(response);
+                toast.success("Deleted Successfully");
+                fetchData();
+            })
+            .catch((error) => {
+                console.error("Error fetching selected classes:", error);
+            });
+    };
     return (
         <div className="container mx-auto">
             <h1 className="text-4xl font-bold my-10 text-center">
@@ -38,7 +61,7 @@ const SelectedClass = () => {
                 <div className="h-[600px] flex items-center justify-center">
                     <FadeLoader color="#36d7b7" />
                 </div>
-            ) : selectedClass.length ===0 ? (
+            ) : selectedClass.length === 0 ? (
                 <div className="text-center my-8">
                     <p className="text-2xl font-bold">
                         No selected classes found.
@@ -53,7 +76,8 @@ const SelectedClass = () => {
                             className="card w-96 bg-base-100 shadow-xl"
                         >
                             <figure>
-                                <img src={item.course.image} alt="Shoes" />
+                                <img src={item.course.image} alt="" 
+                                className="p-4 h-64 w-full object-cover transition duration-500  sm:h-72 rounded-b-lg"/>
                             </figure>
                             <div className="card-body">
                                 <h2 className="card-title">
@@ -68,7 +92,7 @@ const SelectedClass = () => {
                                     Available Seat: {""}
                                     {item.course.availableSeats}
                                 </p>
-                                <div className="card-actions justify-end">
+                                <div className="card-actions justify-between">
                                     <Link to={`/dashboard/payment/${item._id}`}>
                                         <button
                                             className="btn bg-[#00897b] btn-sm text-white hover:bg-[#04342f]"
@@ -78,6 +102,13 @@ const SelectedClass = () => {
                                             Pay Now
                                         </button>
                                     </Link>
+
+                                    <button
+                                        className="btn bg-[#c3422c] btn-sm text-white hover:bg-[#69180d]"
+                                        onClick={() => handleDelete(item._id)}
+                                    >
+                                        Delete
+                                    </button>
                                 </div>
                             </div>
                         </div>

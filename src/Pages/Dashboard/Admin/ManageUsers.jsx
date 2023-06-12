@@ -2,8 +2,11 @@ import axios from "axios";
 import { useQuery } from "react-query";
 import { FadeLoader } from "react-spinners";
 import { ToastContainer, toast } from "react-toastify";
+import setTitle from "../../../hook/setTitle";
 
 const ManageUsers = () => {
+    const token = localStorage.getItem("access-token");
+    setTitle("Users");
     const {
         data: tqData = [],
         isLoading,
@@ -44,7 +47,11 @@ const ManageUsers = () => {
 
     const updateUserRole = (userId, role) => {
         axios
-            .patch(`https://elite-sports-academy-server-ten.vercel.app/users/${userId}`, { role })
+            .patch(`https://elite-sports-academy-server-ten.vercel.app/users/${userId}`, { role },{
+                headers: {
+                    authorization: `bearer ${token}`,
+                }
+            })
             .then(() => {
                 toast.success(`User is now ${role}`);
                 refetch();
@@ -57,10 +64,11 @@ const ManageUsers = () => {
     return (
         <div>
             <ToastContainer></ToastContainer>
+            <h1 className="text-4xl font-bold my-10 text-center">Manage Users</h1>
             <div className="overflow-x-auto w-9/12 mx-auto">
                 <table className="table">
                     {/* head */}
-                    <thead>
+                    <thead className="text-lg font-semibold">
                         <tr>
                             <th></th>
                             <th>Name</th>
@@ -89,7 +97,7 @@ const ManageUsers = () => {
                                     </button>
                                     <button
                                         onClick={() => makeAdmin(data._id)}
-                                        className="btn btn-sm bg-[#00897b] text-white hover:bg-[#04342f]"
+                                        className="btn btn-sm bg-cyan-600 text-white hover:bg-cyan-800"
                                         disabled={
                                             data.role === "admin" ||
                                             data.role === "instructor"

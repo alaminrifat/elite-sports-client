@@ -6,8 +6,11 @@ import { useEffect } from "react";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "./Cardstyle.css";
+import setTitle from "../../../hook/setTitle";
 
 const CheckOut = ({ price, Class }) => {
+    setTitle("Payment");
+    const token = localStorage.getItem("access-token");
     const [cardError, setCardError] = useState("");
     const [clientSecret, setClientSecret] = useState("");
     const [processing, setProcessing] = useState(false);
@@ -20,7 +23,10 @@ const CheckOut = ({ price, Class }) => {
     useEffect(() => {
         if (price > 0) {
             axios
-                .post("https://elite-sports-academy-server-ten.vercel.app/create-payment-intent", { price })
+                .post(
+                    "https://elite-sports-academy-server-ten.vercel.app/create-payment-intent",
+                    { price }
+                )
                 .then((res) => {
                     // console.log(res.data.clientSecret);
                     setClientSecret(res.data.clientSecret);
@@ -85,7 +91,15 @@ const CheckOut = ({ price, Class }) => {
                 date: new Date(),
             };
             axios
-                .post("https://elite-sports-academy-server-ten.vercel.app/payments", payment)
+                .post(
+                    "https://elite-sports-academy-server-ten.vercel.app/payments",
+                    payment,
+                    {
+                        headers: {
+                            authorization: `bearer ${token}`,
+                        },
+                    },
+                )
                 .then((res) => {
                     // console.log(res.data);
                     if (res.data.insertedId) {
@@ -124,7 +138,9 @@ const CheckOut = ({ price, Class }) => {
                 <button
                     className="btn btn-success text-white btn-sm mt-4"
                     type="submit"
-                    disabled={!stripe || processing || !clientSecret || transactionId}
+                    disabled={
+                        !stripe || processing || !clientSecret || transactionId
+                    }
                 >
                     Pay
                 </button>
