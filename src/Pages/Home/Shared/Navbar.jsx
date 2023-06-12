@@ -119,7 +119,7 @@ const Navbar = () => {
             <li>
                 {/* TODO: implement Dark theme */}
                 <button
-                    className="btn-sm bg-green-200 rounded-3xl text-black"
+                    className="btn-sm bg-green-200 rounded-3xl text-black dark:bg-green-200"
                     onClick={handleThemeSwitch}
                 >
                     {theme==="dark" ? "Light" : "Dark"}
